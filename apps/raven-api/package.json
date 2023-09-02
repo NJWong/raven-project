@@ -1,0 +1,22 @@
+{
+	"name": "raven-api",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"api:dev": "wrangler dev",
+		"api:deploy": "wrangler deploy",
+    "schema:pull": "drizzle-kit introspect:sqlite"
+	},
+	"dependencies": {
+		"@libsql/client": "^0.3.2",
+    "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.28.5",
+		"itty-router": "^2.6.1"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20230821.0",
+    "drizzle-kit": "^0.19.13",
+		"typescript": "^5.2.2",
+		"wrangler": "^3.0.0"
+	}
+}
