@@ -1,0 +1,15 @@
+{
+  "name": "raven-project",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "schema:pull": "pnpm run -r schema:pull",
+    "schema:push": "pnpm --filter raven-db schema:push",
+    "db:seed": "pnpm --filter raven-db db:seed",
+    "api:dev": "pnpm --filter raven-api api:dev",
+    "api:deploy": "pnpm --filter raven-api api:deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
