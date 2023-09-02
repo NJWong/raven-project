@@ -1,0 +1,167 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "sqlite",
+  "tables": {
+    "libsql_wasm_func_table": {
+      "name": "libsql_wasm_func_table",
+      "columns": {
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "body": {
+          "autoincrement": false,
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "regulation_version": {
+      "name": "regulation_version",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "autoincrement": false,
+          "name": "date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "head": {
+      "name": "head",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "regulation_version_id": {
+          "autoincrement": false,
+          "name": "regulation_version_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "autoincrement": false,
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ap": {
+          "autoincrement": false,
+          "name": "ap",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anti_kinetic_defense": {
+          "autoincrement": false,
+          "name": "anti_kinetic_defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anti_energy_defense": {
+          "autoincrement": false,
+          "name": "anti_energy_defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anti_explosive_defense": {
+          "autoincrement": false,
+          "name": "anti_explosive_defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "attitude_stability": {
+          "autoincrement": false,
+          "name": "attitude_stability",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "system_recovery": {
+          "autoincrement": false,
+          "name": "system_recovery",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scan_distance": {
+          "autoincrement": false,
+          "name": "scan_distance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scan_effect_duration": {
+          "autoincrement": false,
+          "name": "scan_effect_duration",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "weight": {
+          "autoincrement": false,
+          "name": "weight",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "en_load": {
+          "autoincrement": false,
+          "name": "en_load",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
