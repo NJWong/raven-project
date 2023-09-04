@@ -88,3 +88,23 @@ export const legs = sqliteTable("legs", {
 	weight: integer("weight").notNull(),
 	enLoad: integer("en_load").notNull(),
 });
+
+export const booster = sqliteTable("booster", {
+	id: integer("id").primaryKey().notNull(),
+	regulationVersion: text("regulation_version").notNull(),
+	name: text("name").notNull(),
+	thrust: integer("thrust"),
+	upwardThrust: integer("upward_thrust"),
+	upwardEnConsumption: integer("upward_en_consumption"),
+	qbThrust: integer("qb_thrust"),
+	qbJetDuration: real("qb_jet_duration"),
+	qbEnConsumption: integer("qb_en_consumption"),
+	qbReloadTime: real("qb_reload_time"),
+	qbReloadIdealWeight: integer("qb_reload_ideal_weight"),
+	abThrust: integer("ab_thrust"),
+	abEnConsumption: integer("ab_en_consumption"),
+  meleeAttackThrust: integer("melee_attack_thrust"),
+  meleeAtkEnConsump: integer("melee_atk_en_consump"),
+	weight: integer("weight").notNull(),
+	enLoad: integer("en_load").notNull(),
+});
