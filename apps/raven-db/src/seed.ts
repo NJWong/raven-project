@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client'
 import { LibSQLDatabase, drizzle } from 'drizzle-orm/libsql'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { head, regulationVersion } from '../drizzle/schema'
+import { head, core } from '../drizzle/schema'
 
 dotenv.config()
 
@@ -20,32 +20,6 @@ function snakeToCamel (str: string) {
  */
 function transformHeader (header: string) {
   return snakeToCamel(header)
-}
-
-async function seedRegulationVersion(db: LibSQLDatabase) {
-  console.log('Seeding regulation_version table...')
-
-  fs.readFile('data/regulation_version.csv', 'utf-8', async (err, data) => {
-    if (err) {
-      console.error(err)
-    } else {
-      // 1. Parse CSV file
-      const parsedCsv = Papa.parse(data, { header: true, dynamicTyping: { id: true, name: false, date: false }, transformHeader })
-
-      // 2. Validate CSV data
-      const insertRegulationVersionSchema = createInsertSchema(regulationVersion)
-      const validatedData: Array<z.TypeOf<typeof insertRegulationVersionSchema>> = []
-
-      for (const row of parsedCsv.data) {
-        const validatedRow = insertRegulationVersionSchema.parse(row)
-
-        validatedData.push(validatedRow)
-      }
-
-      // 3. Insert validated data into database
-      await db.insert(regulationVersion).values(validatedData)
-    }
-  })
 }
 
 async function seedHead(db: LibSQLDatabase) {
@@ -84,6 +58,42 @@ async function seedHead(db: LibSQLDatabase) {
   })
 }
 
+async function seedCore(db: LibSQLDatabase) {
+  console.log('Seeding core table...')
+
+  fs.readFile('data/core.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertCoreSchema = createInsertSchema(core)
+      const validatedData: Array<z.TypeOf<typeof insertCoreSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertCoreSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(core).values(validatedData)
+    }
+  })
+}
+
 async function main () {
   console.log('--- db:seed starting ---')
 
@@ -96,9 +106,11 @@ async function main () {
 
   // Clear all tables
   await db.delete(head)
+  await db.delete(core)
 
   // Seed tables
   await seedHead(db)
+  await seedCore(db)
 
   console.log('--- db:seed completed ---\n')
 }
