@@ -8,6 +8,7 @@ const router = Router({ base: '/api/v1/parts' })
 
 router.get('/regulation_version/*', regulationVersionRouter.handle)
 router.get('/head/*', headRouter.handle)
+router.get('/core/*', coreRouter.handle)
 router.get('/arms/*', armsRouter.handle)
 
 export default router
