@@ -44,3 +44,19 @@ export const core = sqliteTable("core", {
 	weight: integer("weight").notNull(),
 	enLoad: integer("en_load").notNull(),
 });
+
+export const arms = sqliteTable("arms", {
+	id: integer("id").primaryKey().notNull(),
+	regulationVersion: text("regulation_version").notNull(),
+	name: text("name").notNull(),
+	ap: integer("ap").notNull(),
+	antiKineticDefense: integer("anti_kinetic_defense").notNull(),
+	antiEnergyDefense: integer("anti_energy_defense").notNull(),
+	antiExplosiveDefense: integer("anti_explosive_defense").notNull(),
+	armsLoadLimit: integer("arms_load_limit").notNull(),
+	recoilControl: integer("recoil_control").notNull(),
+	firearmSpecialization: integer("firearm_specialization").notNull(),
+	meleeSpecialization: integer("melee_specialization").notNull(),
+	weight: integer("weight").notNull(),
+	enLoad: integer("en_load").notNull(),
+});

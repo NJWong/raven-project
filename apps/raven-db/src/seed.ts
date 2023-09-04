@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client'
 import { LibSQLDatabase, drizzle } from 'drizzle-orm/libsql'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { head, core } from '../drizzle/schema'
+import { head, core, arms } from '../drizzle/schema'
 
 dotenv.config()
 
@@ -94,6 +94,42 @@ async function seedCore(db: LibSQLDatabase) {
   })
 }
 
+async function seedArms(db: LibSQLDatabase) {
+  console.log('Seeding arms table...')
+
+  fs.readFile('data/arms.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertArmsSchema = createInsertSchema(arms)
+      const validatedData: Array<z.TypeOf<typeof insertArmsSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertArmsSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(arms).values(validatedData)
+    }
+  })
+}
+
 async function main () {
   console.log('--- db:seed starting ---')
 
@@ -107,10 +143,12 @@ async function main () {
   // Clear all tables
   await db.delete(head)
   await db.delete(core)
+  await db.delete(arms)
 
   // Seed tables
   await seedHead(db)
   await seedCore(db)
+  await seedArms(db)
 
   console.log('--- db:seed completed ---\n')
 }
