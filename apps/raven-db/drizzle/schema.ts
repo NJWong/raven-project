@@ -103,8 +103,8 @@ export const booster = sqliteTable("booster", {
 	qbReloadIdealWeight: integer("qb_reload_ideal_weight"),
 	abThrust: integer("ab_thrust"),
 	abEnConsumption: integer("ab_en_consumption"),
-  meleeAttackThrust: integer("melee_attack_thrust"),
-  meleeAtkEnConsump: integer("melee_atk_en_consump"),
+	meleeAttackThrust: integer("melee_attack_thrust"),
+	meleeAtkEnConsump: integer("melee_atk_en_consump"),
 	weight: integer("weight").notNull(),
 	enLoad: integer("en_load").notNull(),
 });
