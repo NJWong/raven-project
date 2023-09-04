@@ -56,7 +56,17 @@ async function seedHead(db: LibSQLDatabase) {
       console.error(err)
     } else {
       // 1. Parse CSV file
-      const parsedCsv = Papa.parse(data, { header: true, dynamicTyping: true, transformHeader })
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
 
       // 2. Validate CSV data
       const insertHeadSchema = createInsertSchema(head)
@@ -86,10 +96,8 @@ async function main () {
 
   // Clear all tables
   await db.delete(head)
-  await db.delete(regulationVersion)
 
   // Seed tables
-  await seedRegulationVersion(db)
   await seedHead(db)
 
   console.log('--- db:seed completed ---\n')

@@ -15,7 +15,6 @@ export const regulationVersion = sqliteTable("regulation_version", {
 
 export const head = sqliteTable("head", {
 	id: integer("id").primaryKey().notNull(),
-	regulationVersionId: integer("regulation_version_id").notNull(),
 	name: text("name").notNull(),
 	ap: integer("ap").notNull(),
 	antiKineticDefense: integer("anti_kinetic_defense").notNull(),
@@ -27,4 +26,5 @@ export const head = sqliteTable("head", {
 	scanEffectDuration: real("scan_effect_duration").notNull(),
 	weight: integer("weight").notNull(),
 	enLoad: integer("en_load").notNull(),
+	regulationVersion: text("regulation_version").notNull(),
 });
