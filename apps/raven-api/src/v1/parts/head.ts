@@ -1,8 +1,7 @@
 import { Request, Router } from 'itty-router'
 import { createClient } from '@libsql/client/web'
 import { drizzle } from 'drizzle-orm/libsql'
-import { eq } from 'drizzle-orm'
-import { head, regulationVersion } from '../../../drizzle/schema'
+import { head } from '../../../drizzle/schema'
 
 const router = Router({ base: '/api/v1/parts/head' })
 
@@ -14,20 +13,10 @@ router.get('/', async (request: Request, env: Env) => {
 
   const db = drizzle(client)
 
-  const result = await db.select().from(head).innerJoin(regulationVersion, eq(head.regulationVersionId, regulationVersion.id))
-
-  const data = result.map(({ head, regulation_version }) => {
-
-    const { regulationVersionId, ...rest } = head
-
-    return {
-      ...rest,
-      regulationVersion: regulation_version.name,
-    }
-  })
+  const result = await db.select().from(head)
 
   const response = {
-    data,
+    data: result
   }
 
   return new Response(JSON.stringify(response), {
