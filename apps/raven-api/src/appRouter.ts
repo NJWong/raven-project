@@ -16,6 +16,9 @@ router.all('*', () => {
         <p>Some endpoints you can try:</p>
         <ul>
           <li><a href="/api/v1/parts/head">/api/v1/parts/head</a></li>
+          <li><a href="/api/v1/parts/core">/api/v1/parts/core</a></li>
+          <li><a href="/api/v1/parts/arms">/api/v1/parts/arms</a></li>
+          <li><a href="/api/v1/parts/legs">/api/v1/parts/legs</a></li>
         <ul>
       </body>
     </html>
