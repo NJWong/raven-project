@@ -181,6 +181,9 @@ importers:
         specifier: ^4.3.2
         version: 4.4.1(@types/react@18.2.18)(react@18.2.0)
     devDependencies:
+      '@types/mdx':
+        specifier: ^2.0.7
+        version: 2.0.7
       eslint:
         specifier: 8.45.0
         version: 8.45.0
@@ -1317,7 +1320,6 @@ packages:
 
   /@types/mdx@2.0.7:
     resolution: {integrity: sha512-BG4tyr+4amr3WsSEmHn/fXPqaCba/AYZ7dsaQTiavihQunHSIxk+uAtqsjvicNpyHN6cm+B9RVrUOtW9VzIKHw==}
-    dev: false
 
   /@types/ms@0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}

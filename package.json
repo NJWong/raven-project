@@ -11,7 +11,8 @@
     "api:dev": "pnpm --filter raven-api api:dev",
     "api:deploy": "pnpm --filter raven-api api:deploy",
     "\n================== raven-docs ==================": "",
-    "docs:dev": "pnpm --filter raven-docs docs:dev"
+    "docs:dev": "pnpm --filter raven-docs docs:dev",
+    "docs:build": "pnpm --filter raven-docs docs:build"
   },
   "keywords": [],
   "author": "",
