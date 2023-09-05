@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client'
 import { LibSQLDatabase, drizzle } from 'drizzle-orm/libsql'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { head, core, arms, legs, booster } from '../drizzle/schema'
+import { head, core, arms, legs, booster, fcs, generator } from '../drizzle/schema'
 
 dotenv.config()
 
@@ -202,6 +202,78 @@ async function seedBooster(db: LibSQLDatabase) {
   })
 }
 
+async function seedFcs(db: LibSQLDatabase) {
+  console.log('Seeding fcs table...')
+
+  fs.readFile('data/fcs.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertFcsSchema = createInsertSchema(fcs)
+      const validatedData: Array<z.TypeOf<typeof insertFcsSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertFcsSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(fcs).values(validatedData)
+    }
+  })
+}
+
+async function seedGenerator(db: LibSQLDatabase) {
+  console.log('Seeding generator table...')
+
+  fs.readFile('data/generator.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertGeneratorSchema = createInsertSchema(generator)
+      const validatedData: Array<z.TypeOf<typeof insertGeneratorSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertGeneratorSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(generator).values(validatedData)
+    }
+  })
+}
+
 async function main () {
   console.log('--- db:seed starting ---')
 
@@ -218,6 +290,8 @@ async function main () {
   await db.delete(arms)
   await db.delete(legs)
   await db.delete(booster)
+  await db.delete(fcs)
+  await db.delete(generator)
 
   // Seed tables
   await seedHead(db)
@@ -225,6 +299,8 @@ async function main () {
   await seedArms(db)
   await seedLegs(db)
   await seedBooster(db)
+  await seedFcs(db)
+  await seedGenerator(db)
 
   console.log('--- db:seed completed ---\n')
 }
