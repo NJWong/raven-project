@@ -108,3 +108,29 @@ export const booster = sqliteTable("booster", {
 	weight: integer("weight").notNull(),
 	enLoad: integer("en_load").notNull(),
 });
+
+export const fcs = sqliteTable("fcs", {
+	id: integer("id").primaryKey().notNull(),
+	regulationVersion: text("regulation_version").notNull(),
+	name: text("name").notNull(),
+	closeRangeAssist: integer("close_range_assist").notNull(),
+	mediumRangeAssist: integer("medium_range_assist").notNull(),
+	longRangeAssist: integer("long_range_assist").notNull(),
+	missileLockCorrection: integer("missile_lock_correction").notNull(),
+	multiLockCorrection: integer("multi_lock_correction").notNull(),
+	weight: integer("weight").notNull(),
+	enLoad: integer("en_load").notNull(),
+});
+
+export const generator = sqliteTable("generator", {
+	id: integer("id").primaryKey().notNull(),
+	regulationVersion: text("regulation_version").notNull(),
+	name: text("name").notNull(),
+	enCapacity: integer("en_capacity").notNull(),
+	enRecharge: integer("en_recharge").notNull(),
+	supplyRecovery: integer("supply_recovery").notNull(),
+	postRecoveryEnSupply: integer("post_recovery_en_supply").notNull(),
+	energyFirearmSpec: integer("energy_firearm_spec").notNull(),
+	weight: integer("weight").notNull(),
+	enOutput: integer("en_output").notNull(),
+});
