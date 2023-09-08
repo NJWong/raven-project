@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client'
 import { LibSQLDatabase, drizzle } from 'drizzle-orm/libsql'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { head, core, arms, legs, booster, fcs, generator } from '../drizzle/schema'
+import { head, core, arms, legs, booster, fcs, generator, acSpecs, partsSpecs } from '../drizzle/schema'
 
 dotenv.config()
 
@@ -43,11 +43,11 @@ async function seedHead(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertHeadSchema = createInsertSchema(head)
-      const validatedData: Array<z.TypeOf<typeof insertHeadSchema>> = []
+      const insertSchema = createInsertSchema(head)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertHeadSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -79,11 +79,11 @@ async function seedCore(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertCoreSchema = createInsertSchema(core)
-      const validatedData: Array<z.TypeOf<typeof insertCoreSchema>> = []
+      const insertSchema = createInsertSchema(core)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertCoreSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -115,11 +115,11 @@ async function seedArms(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertArmsSchema = createInsertSchema(arms)
-      const validatedData: Array<z.TypeOf<typeof insertArmsSchema>> = []
+      const insertSchema = createInsertSchema(arms)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertArmsSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -151,11 +151,11 @@ async function seedLegs(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertLegsSchema = createInsertSchema(legs)
-      const validatedData: Array<z.TypeOf<typeof insertLegsSchema>> = []
+      const insertSchema = createInsertSchema(legs)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertLegsSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -187,11 +187,11 @@ async function seedBooster(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertBoosterSchema = createInsertSchema(booster)
-      const validatedData: Array<z.TypeOf<typeof insertBoosterSchema>> = []
+      const insertSchema = createInsertSchema(booster)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertBoosterSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -223,11 +223,11 @@ async function seedFcs(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertFcsSchema = createInsertSchema(fcs)
-      const validatedData: Array<z.TypeOf<typeof insertFcsSchema>> = []
+      const insertSchema = createInsertSchema(fcs)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertFcsSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
@@ -259,17 +259,77 @@ async function seedGenerator(db: LibSQLDatabase) {
       })
 
       // 2. Validate CSV data
-      const insertGeneratorSchema = createInsertSchema(generator)
-      const validatedData: Array<z.TypeOf<typeof insertGeneratorSchema>> = []
+      const insertSchema = createInsertSchema(generator)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
 
       for (const row of parsedCsv.data) {
-        const validatedRow = insertGeneratorSchema.parse(row)
+        const validatedRow = insertSchema.parse(row)
 
         validatedData.push(validatedRow)
       }
 
       // 3. Insert validated data into database
       await db.insert(generator).values(validatedData)
+    }
+  })
+}
+
+async function seedAcSpecs(db: LibSQLDatabase) {
+  console.log('Seeding ac_specs table...')
+
+  fs.readFile('data/ac_specs.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: true,
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertSchema = createInsertSchema(acSpecs)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(acSpecs).values(validatedData)
+    }
+  })
+}
+
+async function seedPartsSpecs(db: LibSQLDatabase) {
+  console.log('Seeding parts_specs table...')
+
+  fs.readFile('data/parts_specs.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: true,
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertSchema = createInsertSchema(partsSpecs)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(partsSpecs).values(validatedData)
     }
   })
 }
@@ -292,6 +352,8 @@ async function main () {
   await db.delete(booster)
   await db.delete(fcs)
   await db.delete(generator)
+  await db.delete(acSpecs)
+  await db.delete(partsSpecs)
 
   // Seed tables
   await seedHead(db)
@@ -301,6 +363,8 @@ async function main () {
   await seedBooster(db)
   await seedFcs(db)
   await seedGenerator(db)
+  await seedAcSpecs(db)
+  await seedPartsSpecs(db)
 
   console.log('--- db:seed completed ---\n')
 }

@@ -134,3 +134,19 @@ export const generator = sqliteTable("generator", {
 	weight: integer("weight").notNull(),
 	enOutput: integer("en_output").notNull(),
 });
+
+export const acSpecs = sqliteTable("ac_specs", {
+	id: integer("id").primaryKey().notNull(),
+  name: text("name").notNull(),
+	label: text("label").notNull(),
+	description: text("description").notNull(),
+	notes: integer("notes"),
+});
+
+export const partsSpecs = sqliteTable("parts_specs", {
+	id: integer("id").primaryKey().notNull(),
+  name: text("name").notNull(),
+	label: text("label").notNull(),
+	description: text("description").notNull(),
+	notes: integer("notes"),
+});
