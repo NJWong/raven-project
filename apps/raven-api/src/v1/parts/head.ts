@@ -1,7 +1,7 @@
 import { Request, Router } from 'itty-router'
 import { createClient } from '@libsql/client/web'
 import { drizzle } from 'drizzle-orm/libsql'
-import { sql } from "drizzle-orm"
+import { sql, eq } from "drizzle-orm"
 import { head } from '../../../drizzle/schema'
 
 const router = Router({ base: '/api/v1/parts/head' })
@@ -33,6 +33,36 @@ router.get('/', async (request: Request, env: Env) => {
   }
 
   return new Response(JSON.stringify(response), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  })
+})
+
+router.get('/:id', async (request: Request, env: Env) => {
+  const id = parseInt(request.params?.id ?? '')
+
+  if (isNaN(id)) {
+    return new Response(JSON.stringify({ error: 'Invalid ID' }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+  }
+
+  const client = createClient({
+    url: env.DATABASE_URL,
+    authToken: env.DATABASE_AUTH_TOKEN,
+  })
+
+  const db = drizzle(client)
+
+  const result = await db.select().from(head).where(eq(head.id, id))
+
+  return new Response(JSON.stringify(result[0]), {
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
