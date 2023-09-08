@@ -137,7 +137,7 @@ export const generator = sqliteTable("generator", {
 
 export const acSpecs = sqliteTable("ac_specs", {
 	id: integer("id").primaryKey().notNull(),
-  name: text("name").notNull(),
+	name: text("name").notNull(),
 	label: text("label").notNull(),
 	description: text("description").notNull(),
 	notes: integer("notes"),
@@ -145,7 +145,7 @@ export const acSpecs = sqliteTable("ac_specs", {
 
 export const partsSpecs = sqliteTable("parts_specs", {
 	id: integer("id").primaryKey().notNull(),
-  name: text("name").notNull(),
+	name: text("name").notNull(),
 	label: text("label").notNull(),
 	description: text("description").notNull(),
 	notes: integer("notes"),
