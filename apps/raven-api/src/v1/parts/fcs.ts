@@ -1,11 +1,18 @@
 import { Request, Router } from 'itty-router'
 import { createClient } from '@libsql/client/web'
 import { drizzle } from 'drizzle-orm/libsql'
+import { sql } from "drizzle-orm"
 import { fcs } from '../../../drizzle/schema'
 
 const router = Router({ base: '/api/v1/parts/fcs' })
 
 router.get('/', async (request: Request, env: Env) => {
+  const url = new URL(request.url)
+  const params = new URLSearchParams(url.search)
+  const limit = parseInt(params.get('limit') ?? '20') ?? 20
+  const cappedLimit = Math.min(limit, 60)
+  const offset = parseInt(params.get('offset') ?? '0') ?? 0
+
 	const client = createClient({
 		url: env.DATABASE_URL,
 		authToken: env.DATABASE_AUTH_TOKEN,
@@ -13,9 +20,15 @@ router.get('/', async (request: Request, env: Env) => {
 
   const db = drizzle(client)
 
-  const result = await db.select().from(fcs)
+  const result = await db.select().from(fcs).orderBy(fcs.id).limit(cappedLimit).offset(offset)
+  const countResult = await db.select({ count: sql<number>`count(*)` }).from(fcs)
 
   const response = {
+    meta: {
+      limit: cappedLimit,
+      offset,
+      total: countResult[0].count,
+    },
     data: result
   }
 
