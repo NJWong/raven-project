@@ -10,7 +10,7 @@ id,name,label,description,notes
 9,currentArmsLoad,Current Arms Load,Weight of both hand weapons as a proportion of the maximum arm load.\n\nExceeding the limit will result in diminished target tracking and recoil control.,
 10,currentEnLoad,Current EN Load,EN load as a proportion of EN output.\n\nThe AC cannot sortie if this value exceeds the limit.,
 11,currentLoad,Current Load,Total load as a proportion of the maximum load.\n\nThe AC cannot sortie if this value exceeds the limit. (The OS upgrade Weight Control can bypass this restriction.),
-12,enCapacity,EN Capacity,Total amount of En available for use.\n\nHigher values enable heavy use of EN-consuming actions.,
+12,enCapacity,EN Capacity,Total amount of EN available for use.\n\nHigher values enable heavy use of EN-consuming actions.,
 13,enOutput,EN Output,"EN output of the AC.\n\nHigher values mean that the generator can support more high-burden parts, with the leftover output improving EN recovery speed.\n\nImproved by generators with a higher EN output spec and cores with a higher Generator Output Adjustment spec.",
 14,enRechargeDelay,EN Recharge Delay,"Duration of the delay before EN is recharged.\n\nThe lower the value, the more quickly EN recovers after an EN-consuming action.\n\nImproved by generators with a higher EN Recharge spec and cores with a higher Generator Supply Adjustment spec.",
 15,enSupplyEfficiency,EN Supply Efficiency,"Rate at which EN is supplied to the AC.\n\nHigher values enable faster EN recovery.\n\nImproved by the EN Output spec of the generator and influenced by the total EN load of the AC, with lighter assemblies recovering EN more quickly.",

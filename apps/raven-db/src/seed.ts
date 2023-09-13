@@ -5,7 +5,7 @@ import { createClient } from '@libsql/client'
 import { LibSQLDatabase, drizzle } from 'drizzle-orm/libsql'
 import { createInsertSchema } from 'drizzle-zod'
 import { z } from 'zod'
-import { head, core, arms, legs, booster, fcs, generator, acSpecs, partsSpecs } from '../drizzle/schema'
+import { head, core, arms, legs, booster, fcs, generator, acSpecs, partsSpecs, armUnit, backUnit } from '../drizzle/schema'
 
 dotenv.config()
 
@@ -274,6 +274,78 @@ async function seedGenerator(db: LibSQLDatabase) {
   })
 }
 
+async function seedArmUnit(db: LibSQLDatabase) {
+  console.log('Seeding arm_unit table...')
+
+  fs.readFile('data/parts/arm-unit.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertSchema = createInsertSchema(armUnit)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(armUnit).values(validatedData)
+    }
+  })
+}
+
+async function seedBackUnit(db: LibSQLDatabase) {
+  console.log('Seeding back_unit table...')
+
+  fs.readFile('data/parts/back-unit.csv', 'utf-8', async (err, data) => {
+    if (err) {
+      console.error(err)
+    } else {
+      // 1. Parse CSV file
+      const parsedCsv = Papa.parse(data, {
+        header: true,
+        dynamicTyping: (header) => {
+          if (header === 'regulationVersion') {
+            return false
+          }
+
+          return true
+        },
+        transformHeader,
+      })
+
+      // 2. Validate CSV data
+      const insertSchema = createInsertSchema(backUnit)
+      const validatedData: Array<z.TypeOf<typeof insertSchema>> = []
+
+      for (const row of parsedCsv.data) {
+        const validatedRow = insertSchema.parse(row)
+
+        validatedData.push(validatedRow)
+      }
+
+      // 3. Insert validated data into database
+      await db.insert(backUnit).values(validatedData)
+    }
+  })
+}
+
 async function seedAcSpecs(db: LibSQLDatabase) {
   console.log('Seeding ac_specs table...')
 
@@ -352,6 +424,8 @@ async function main () {
   await db.delete(booster)
   await db.delete(fcs)
   await db.delete(generator)
+  await db.delete(armUnit)
+  await db.delete(backUnit)
   await db.delete(acSpecs)
   await db.delete(partsSpecs)
 
@@ -363,6 +437,8 @@ async function main () {
   await seedBooster(db)
   await seedFcs(db)
   await seedGenerator(db)
+  await seedArmUnit(db)
+  await seedBackUnit(db)
   await seedAcSpecs(db)
   await seedPartsSpecs(db)
 
