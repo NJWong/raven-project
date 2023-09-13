@@ -196,7 +196,7 @@ function CodeGroupHeader({
               className={clsx(
                 'border-b py-3 transition ui-not-focus-visible:outline-none',
                 childIndex === selectedIndex
-                  ? 'border-emerald-500 text-emerald-400'
+                  ? 'border-rose-500 text-rose-400'
                   : 'border-transparent text-zinc-400 hover:text-zinc-300',
               )}
             >

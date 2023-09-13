@@ -1,0 +1,1523 @@
+import partsSpecs from '../../content/parts-specs.ts'
+
+export const metadata = {
+  title: 'API Reference - Parts',
+  description: 'All parts you can use for your AC',
+}
+
+# Parts
+
+Parts are the building blocks of your AC. {{ className: 'lead' }}
+
+---
+
+## Head {{ tag: 'MODEL' }}
+
+Properties returned for each head part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="ap" type="number">
+    {partsSpecs.ap}
+  </Property>
+  <Property name="antiKineticDefense" type="number">
+    {partsSpecs.antiKineticDefense}
+  </Property>
+  <Property name="antiEnergyDefense" type="number">
+    {partsSpecs.antiEnergyDefense}
+  </Property>
+  <Property name="antiExplosiveDefense" type="number">
+    {partsSpecs.antiExplosiveDefense}
+  </Property>
+  <Property name="attitudeStability" type="number">
+    {partsSpecs.attitudeStability}
+  </Property>
+  <Property name="systemRecovery" type="number">
+    {partsSpecs.systemRecovery}
+  </Property>
+  <Property name="scanDistance" type="number">
+    {partsSpecs.scanDistance}
+  </Property>
+  <Property name="scanEffectDuration" type="number">
+    {partsSpecs.scanEffectDuration}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all head parts {{ tag: 'GET', label: '/api/v1/parts/head' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all head parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/head">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/head -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/head?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 22
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "NACHTREIHER/44E",
+          "ap": 590,
+          "antiKineticDefense": 153,
+          "antiEnergyDefense": 155,
+          "antiExplosiveDefense": 152,
+          "attitudeStability": 422,
+          "systemRecovery": 92,
+          "scanDistance": 280,
+          "scanEffectDuration": 13.2,
+          "weight": 2320,
+          "enLoad": 210
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "KASUAR/44Z",
+          "ap": 400,
+          "antiKineticDefense": 149,
+          "antiEnergyDefense": 157,
+          "antiExplosiveDefense": 151,
+          "attitudeStability": 498,
+          "systemRecovery": 108,
+          "scanDistance": 620,
+          "scanEffectDuration": 5.4,
+          "weight": 2590,
+          "enLoad": 254
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a head part {{ tag: 'GET', label: '/api/v1/parts/head/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the head part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/head/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/head/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/head/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "NACHTREIHER/44E",
+      "ap": 590,
+      "antiKineticDefense": 153,
+      "antiEnergyDefense": 155,
+      "antiExplosiveDefense": 152,
+      "attitudeStability": 422,
+      "systemRecovery": 92,
+      "scanDistance": 280,
+      "scanEffectDuration": 13.2,
+      "weight": 2320,
+      "enLoad": 210
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Core {{ tag: 'MODEL' }}
+
+Properties returned for each core part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="ap" type="number">
+    {partsSpecs.ap}
+  </Property>
+  <Property name="antiKineticDefense" type="number">
+    {partsSpecs.antiKineticDefense}
+  </Property>
+  <Property name="antiEnergyDefense" type="number">
+    {partsSpecs.antiEnergyDefense}
+  </Property>
+  <Property name="antiExplosiveDefense" type="number">
+    {partsSpecs.antiExplosiveDefense}
+  </Property>
+  <Property name="attitudeStability" type="number">
+    {partsSpecs.attitudeStability}
+  </Property>
+  <Property name="boosterEfficiencyAdj" type="number">
+    {partsSpecs.boosterEfficiencyAdj}
+  </Property>
+  <Property name="generatorOutputAdj" type="number">
+    {partsSpecs.generatorOutputAdj}
+  </Property>
+  <Property name="generatorSupplyAdj" type="number">
+    {partsSpecs.generatorSupplyAdj}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all core parts {{ tag: 'GET', label: '/api/v1/parts/core' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all core parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/core">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/core -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/core?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 16
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "CC-2000 ORBITER",
+          "ap": 2780,
+          "antiKineticDefense": 393,
+          "antiEnergyDefense": 366,
+          "antiExplosiveDefense": 374,
+          "attitudeStability": 407,
+          "boosterEfficiencyAdj": 100,
+          "generatorOutputAdj": 103,
+          "generatorSupplyAdj": 93,
+          "weight": 12650,
+          "enLoad": 267
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "CC-3000 WRECKER",
+          "ap": 3940,
+          "antiKineticDefense": 468,
+          "antiEnergyDefense": 434,
+          "antiExplosiveDefense": 461,
+          "attitudeStability": 532,
+          "boosterEfficiencyAdj": 80,
+          "generatorOutputAdj": 96,
+          "generatorSupplyAdj": 100,
+          "weight": 19000,
+          "enLoad": 310
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a core part {{ tag: 'GET', label: '/api/v1/parts/core/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the core part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/core/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/core/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/core/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "CC-2000 ORBITER",
+      "ap": 2780,
+      "antiKineticDefense": 393,
+      "antiEnergyDefense": 366,
+      "antiExplosiveDefense": 374,
+      "attitudeStability": 407,
+      "boosterEfficiencyAdj": 100,
+      "generatorOutputAdj": 103,
+      "generatorSupplyAdj": 93,
+      "weight": 12650,
+      "enLoad": 267
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Arms {{ tag: 'MODEL' }}
+
+Properties returned for each arms part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="ap" type="number">
+    {partsSpecs.ap}
+  </Property>
+  <Property name="antiKineticDefense" type="number">
+    {partsSpecs.antiKineticDefense}
+  </Property>
+  <Property name="antiEnergyDefense" type="number">
+    {partsSpecs.antiEnergyDefense}
+  </Property>
+  <Property name="antiExplosiveDefense" type="number">
+    {partsSpecs.antiExplosiveDefense}
+  </Property>
+  <Property name="armsLoadLimit" type="number">
+    {partsSpecs.armsLoadLimit}
+  </Property>
+  <Property name="recoilControl" type="number">
+    {partsSpecs.recoilControl}
+  </Property>
+  <Property name="firearmSpecialization" type="number">
+    {partsSpecs.firearmSpecialization}
+  </Property>
+  <Property name="meleeSpecialization" type="number">
+    {partsSpecs.meleeSpecialization}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all arms parts {{ tag: 'GET', label: '/api/v1/parts/arms' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all arms parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/arms">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/arms -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/arms?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 18
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "NACHTREIHER/46E",
+          "ap": 1860,
+          "antiKineticDefense": 204,
+          "antiEnergyDefense": 213,
+          "antiExplosiveDefense": 195,
+          "armsLoadLimit": 12730,
+          "recoilControl": 52,
+          "firearmSpecialization": 160,
+          "meleeSpecialization": 95,
+          "weight": 11420,
+          "enLoad": 302
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "VE-46A",
+          "ap": 2260,
+          "antiKineticDefense": 262,
+          "antiEnergyDefense": 270,
+          "antiExplosiveDefense": 257,
+          "armsLoadLimit": 21300,
+          "recoilControl": 160,
+          "firearmSpecialization": 80,
+          "meleeSpecialization": 76,
+          "weight": 22210,
+          "enLoad": 380
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a arms part {{ tag: 'GET', label: '/api/v1/parts/arms/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the arms part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/arms/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/arms/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/arms/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "NACHTREIHER/46E",
+      "ap": 1860,
+      "antiKineticDefense": 204,
+      "antiEnergyDefense": 213,
+      "antiExplosiveDefense": 195,
+      "armsLoadLimit": 12730,
+      "recoilControl": 52,
+      "firearmSpecialization": 160,
+      "meleeSpecialization": 95,
+      "weight": 11420,
+      "enLoad": 302
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Legs {{ tag: 'MODEL' }}
+
+Properties returned for each legs part.
+
+<Note>
+  Not all properties apply to all legs. For example, tank tread legs do not have
+  `jumpDistance` or `jumpHeight`.
+</Note>
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="ap" type="number">
+    {partsSpecs.ap}
+  </Property>
+  <Property name="antiKineticDefense" type="number">
+    {partsSpecs.antiKineticDefense}
+  </Property>
+  <Property name="antiEnergyDefense" type="number">
+    {partsSpecs.antiEnergyDefense}
+  </Property>
+  <Property name="antiExplosiveDefense" type="number">
+    {partsSpecs.antiExplosiveDefense}
+  </Property>
+  <Property name="attitudeStability" type="number">
+    {partsSpecs.attitudeStability}
+  </Property>
+  <Property name="loadLimit" type="number">
+    {partsSpecs.loadLimit}
+  </Property>
+  <Property name="jumpDistance" type="number | null">
+    {partsSpecs.jumpDistance}
+  </Property>
+  <Property name="jumpHeight" type="number | null">
+    {partsSpecs.jumpHeight}
+  </Property>
+  <Property name="travelSpeed" type="number | null">
+    {partsSpecs.travelSpeed}
+  </Property>
+  <Property name="highSpeedPerf" type="number | null">
+    {partsSpecs.highSpeedPerf}
+  </Property>
+  <Property name="thrust" type="number | null">
+    {partsSpecs.thrust}
+  </Property>
+  <Property name="upwardThrust" type="number | null">
+    {partsSpecs.upwardThrust}
+  </Property>
+  <Property name="upwardEnConsumption" type="number | null">
+    {partsSpecs.upwardEnConsumption}
+  </Property>
+  <Property name="qbThrust" type="number | null">
+    {partsSpecs.qbThrust}
+  </Property>
+  <Property name="qbJetDuration" type="number | null">
+    {partsSpecs.qbJetDuration}
+  </Property>
+  <Property name="qbEnConsumption" type="number | null">
+    {partsSpecs.qbEnConsumption}
+  </Property>
+  <Property name="qbReloadTime" type="number | null">
+    {partsSpecs.qbReloadTime}
+  </Property>
+  <Property name="qbReloadIdealWeight" type="number | null">
+    {partsSpecs.qbReloadIdealWeight}
+  </Property>
+  <Property name="abThrust" type="number | null">
+    {partsSpecs.abThrust}
+  </Property>
+  <Property name="abEnConsumption" type="number | null">
+    {partsSpecs.abEnConsumption}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all legs parts {{ tag: 'GET', label: '/api/v1/parts/legs' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all legs parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/legs">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/legs -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/legs?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 24
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "2C-2000 CRAWLER",
+          "ap": 3650,
+          "antiKineticDefense": 326,
+          "antiEnergyDefense": 322,
+          "antiExplosiveDefense": 337,
+          "attitudeStability": 749,
+          "loadLimit": 51200,
+          "jumpDistance": 90,
+          "jumpHeight": 24,
+          "travelSpeed": null,
+          "highSpeedPerf": null,
+          "thrust": null,
+          "upwardThrust": null,
+          "upwardEnConsumption": null,
+          "qbThrust": null,
+          "qbJetDuration": null,
+          "qbEnConsumption": null,
+          "qbReloadTime": null,
+          "qbReloadIdealWeight": null,
+          "abThrust": null,
+          "abEnConsumption": null,
+          "weight": 16300,
+          "enLoad": 280
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "2C-3000 WRECKER",
+          "ap": 4220,
+          "antiKineticDefense": 350,
+          "antiEnergyDefense": 312,
+          "antiExplosiveDefense": 383,
+          "attitudeStability": 943,
+          "loadLimit": 68900,
+          "jumpDistance": 76,
+          "jumpHeight": 17,
+          "travelSpeed": null,
+          "highSpeedPerf": null,
+          "thrust": null,
+          "upwardThrust": null,
+          "upwardEnConsumption": null,
+          "qbThrust": null,
+          "qbJetDuration": null,
+          "qbEnConsumption": null,
+          "qbReloadTime": null,
+          "qbReloadIdealWeight": null,
+          "abThrust": null,
+          "abEnConsumption": null,
+          "weight": 21680,
+          "enLoad": 680
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a legs part {{ tag: 'GET', label: '/api/v1/parts/legs/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the legs part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/legs/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/legs/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/legs/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "2C-2000 CRAWLER",
+      "ap": 3650,
+      "antiKineticDefense": 326,
+      "antiEnergyDefense": 322,
+      "antiExplosiveDefense": 337,
+      "attitudeStability": 749,
+      "loadLimit": 51200,
+      "jumpDistance": 90,
+      "jumpHeight": 24,
+      "travelSpeed": null,
+      "highSpeedPerf": null,
+      "thrust": null,
+      "upwardThrust": null,
+      "upwardEnConsumption": null,
+      "qbThrust": null,
+      "qbJetDuration": null,
+      "qbEnConsumption": null,
+      "qbReloadTime": null,
+      "qbReloadIdealWeight": null,
+      "abThrust": null,
+      "abEnConsumption": null,
+      "weight": 16300,
+      "enLoad": 280
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Booster {{ tag: 'MODEL' }}
+
+Properties returned for each booster part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="thrust" type="number">
+    {partsSpecs.thrust}
+  </Property>
+  <Property name="upwardThrust" type="number">
+    {partsSpecs.upwardThrust}
+  </Property>
+  <Property name="upwardEnConsumption" type="number">
+    {partsSpecs.upwardEnConsumption}
+  </Property>
+  <Property name="qbThrust" type="number">
+    {partsSpecs.qbThrust}
+  </Property>
+  <Property name="qbJetDuration" type="number">
+    {partsSpecs.qbJetDuration}
+  </Property>
+  <Property name="qbEnConsumption" type="number">
+    {partsSpecs.qbEnConsumption}
+  </Property>
+  <Property name="qbReloadTime" type="number">
+    {partsSpecs.qbReloadTime}
+  </Property>
+  <Property name="qbReloadIdealWeight" type="number">
+    {partsSpecs.qbReloadIdealWeight}
+  </Property>
+  <Property name="abThrust" type="number">
+    {partsSpecs.abThrust}
+  </Property>
+  <Property name="abEnConsumption" type="number">
+    {partsSpecs.abEnConsumption}
+  </Property>
+  <Property name="meleeAttackThrust" type="number">
+    {partsSpecs.meleeAttackThrust}
+  </Property>
+  <Property name="meleeAtkEnConsump" type="number">
+    {partsSpecs.meleeAtkEnConsump}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all booster parts {{ tag: 'GET', label: '/api/v1/parts/booster' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all booster parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/booster">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/booster -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/booster?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 12
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "BC-0400 MULE",
+          "thrust": 5417,
+          "upwardThrust": 4434,
+          "upwardEnConsumption": 405,
+          "qbThrust": 17500,
+          "qbJetDuration": 0.46,
+          "qbEnConsumption": 670,
+          "qbReloadTime": 0.58,
+          "qbReloadIdealWeight": 80000,
+          "abThrust": 7584,
+          "abEnConsumption": 381,
+          "meleeAttackThrust": 7018,
+          "meleeAtkEnConsump": 390,
+          "weight": 970,
+          "enLoad": 200
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "BC-0200 GRIDWALKER",
+          "thrust": 6401,
+          "upwardThrust": 6334,
+          "upwardEnConsumption": 660,
+          "qbThrust": 19000,
+          "qbJetDuration": 0.33,
+          "qbEnConsumption": 660,
+          "qbReloadTime": 0.7,
+          "qbReloadIdealWeight": 60900,
+          "abThrust": 8585,
+          "abEnConsumption": 387,
+          "meleeAttackThrust": 11468,
+          "meleeAtkEnConsump": 520,
+          "weight": 2010,
+          "enLoad": 244
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a booster part {{ tag: 'GET', label: '/api/v1/parts/booster/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the booster part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/booster/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/booster/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/booster/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "BC-0400 MULE",
+      "thrust": 5417,
+      "upwardThrust": 4434,
+      "upwardEnConsumption": 405,
+      "qbThrust": 17500,
+      "qbJetDuration": 0.46,
+      "qbEnConsumption": 670,
+      "qbReloadTime": 0.58,
+      "qbReloadIdealWeight": 80000,
+      "abThrust": 7584,
+      "abEnConsumption": 381,
+      "meleeAttackThrust": 7018,
+      "meleeAtkEnConsump": 390,
+      "weight": 970,
+      "enLoad": 200
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## FCS {{ tag: 'MODEL' }}
+
+Properties returned for each fcs part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="closeRangeAssist" type="number">
+    {partsSpecs.closeRangeAssist}
+  </Property>
+  <Property name="mediumRangeAssist" type="number">
+    {partsSpecs.mediumRangeAssist}
+  </Property>
+  <Property name="longRangeAssist" type="number">
+    {partsSpecs.longRangeAssist}
+  </Property>
+  <Property name="missileLockCorrection" type="number">
+    {partsSpecs.missileLockCorrection}
+  </Property>
+  <Property name="multiLockCorrection" type="number">
+    {partsSpecs.multiLockCorrection}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all fcs parts {{ tag: 'GET', label: '/api/v1/parts/fcs' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all fcs parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/fcs">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/fcs -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/fcs?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 10
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "IA-C01F: OCELLUS",
+          "closeRangeAssist": 90,
+          "mediumRangeAssist": 12,
+          "longRangeAssist": 3,
+          "missileLockCorrection": 85,
+          "multiLockCorrection": 50,
+          "weight": 130,
+          "enLoad": 292
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "IB-C03F: WLT 001",
+          "closeRangeAssist": 50,
+          "mediumRangeAssist": 72,
+          "longRangeAssist": 48,
+          "missileLockCorrection": 102,
+          "multiLockCorrection": 66,
+          "weight": 150,
+          "enLoad": 486
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a fcs part {{ tag: 'GET', label: '/api/v1/parts/fcs/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the fcs part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/fcs/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/fcs/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/fcs/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "IA-C01F: OCELLUS",
+      "closeRangeAssist": 90,
+      "mediumRangeAssist": 12,
+      "longRangeAssist": 3,
+      "missileLockCorrection": 85,
+      "multiLockCorrection": 50,
+      "weight": 130,
+      "enLoad": 292
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Generator {{ tag: 'MODEL' }}
+
+Properties returned for each generator part.
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="enCapacity" type="number">
+    {partsSpecs.enCapacity}
+  </Property>
+  <Property name="enRecharge" type="number">
+    {partsSpecs.enRecharge}
+  </Property>
+  <Property name="supplyRecovery" type="number">
+    {partsSpecs.supplyRecovery}
+  </Property>
+  <Property name="postRecoveryEnSupply" type="number">
+    {partsSpecs.postRecoveryEnSupply}
+  </Property>
+  <Property name="energyFirearmSpec" type="number">
+    {partsSpecs.energyFirearmSpec}
+  </Property>
+  <Property name="weight" type="number">
+    {partsSpecs.weight}
+  </Property>
+  <Property name="enLoad" type="number">
+    {partsSpecs.enLoad}
+  </Property>
+</Properties>
+
+---
+
+## List all generator parts {{ tag: 'GET', label: '/api/v1/parts/generator' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all generator parts.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/generator">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/generator -d limit=2 offset=8
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/generator?limit=2&offset=8')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 8,
+        "total": 14
+      },
+      "data": [
+        {
+          "id": 9,
+          "regulationVersion": "1.01",
+          "name": "VP-20D",
+          "enCapacity": 3250,
+          "enRecharge": 714,
+          "supplyRecovery": 384,
+          "postRecoveryEnSupply": 1400,
+          "energyFirearmSpec": 98,
+          "weight": 11030,
+          "enOutput": 4430
+        },
+        {
+          "id": 10,
+          "regulationVersion": "1.01",
+          "name": "VE-20A",
+          "enCapacity": 2460,
+          "enRecharge": 740,
+          "supplyRecovery": 416,
+          "postRecoveryEnSupply": 600,
+          "energyFirearmSpec": 116,
+          "weight": 3590,
+          "enOutput": 3120
+        }
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a generator part {{ tag: 'GET', label: '/api/v1/parts/generator/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the generator part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/generator/9">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/generator/9
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/generator/9')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 9,
+      "regulationVersion": "1.01",
+      "name": "VP-20D",
+      "enCapacity": 3250,
+      "enRecharge": 714,
+      "supplyRecovery": 384,
+      "postRecoveryEnSupply": 1400,
+      "energyFirearmSpec": 98,
+      "weight": 11030,
+      "enOutput": 4430
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Expansion {{ tag: 'MODEL' }}
+
+Properties returned for each expansion part.
+
+<Note>
+  Not all properties apply to all expansion parts. For example, `ASSAULT ARMOR`
+  doesn't have `resilience` or `duration` specs.
+</Note>
+
+<Properties>
+  <Property name="id" type="number">
+    {partsSpecs.id}
+  </Property>
+  <Property name="regulationVersion" type="string">
+    {partsSpecs.regulationVersion}
+  </Property>
+  <Property name="name" type="string">
+    {partsSpecs.name}
+  </Property>
+  <Property name="attackPower" type="number | null">
+    {partsSpecs.attackPower}
+  </Property>
+  <Property name="impact" type="number | null">
+    {partsSpecs.impact}
+  </Property>
+  <Property name="accumulativeImpact" type="number | null">
+    {partsSpecs.accumulativeImpact}
+  </Property>
+  <Property name="blastRadius" type="number | null">
+    {partsSpecs.blastRadius}
+  </Property>
+  <Property name="directHitAdjustment" type="number | null">
+    {partsSpecs.directHitAdjustment}
+  </Property>
+  <Property name="resilience" type="number | null">
+    {partsSpecs.resilience}
+  </Property>
+  <Property name="duration" type="number | null">
+    {partsSpecs.duration}
+  </Property>
+</Properties>
+
+---
+
+## List all expansion parts {{ tag: 'GET', label: '/api/v1/parts/expansion' }}
+
+<Row>
+  <Col>
+
+    Returns a paginated list of all expansion parts.
+
+    <Note>There are only 4 expansion parts in the game. Pagination is included here just to be consistent with the other part resources.</Note>
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="limit" type="integer">
+        Pagniation limit for parts. Defaults to 20 if not specified.
+      </Property>
+      <Property name="offset" type="integer">
+        Pagniation offset for parts. Defaults to 0 if not specified.
+      </Property>
+    </Properties>
+
+    <div className="not-prose">
+      <Button
+        href="/pagination"
+        variant="text"
+        arrow="right"
+        children="See Pagination Guide for more information"
+      />
+    </div>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/expansion">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/expansion
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/expansion?limit=2')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "meta": {
+        "limit": 2,
+        "offset": 0,
+        "total": 4
+      },
+      "data": [
+        {
+          "id": 1,
+          "regulationVersion": "1.01",
+          "name": "ASSAULT ARMOR",
+          "attackPower": 1500,
+          "impact": 2000,
+          "accumulativeImpact": 1380,
+          "blastRadius": 60,
+          "effectRange": 200,
+          "directHitAdjustment": 230,
+          "resilience": null,
+          "duration": null
+        },
+        {
+          "id": 2,
+          "regulationVersion": "1.01",
+          "name": "PULSE ARMOR",
+          "attackPower": null,
+          "impact": null,
+          "accumulativeImpact": null,
+          "blastRadius": null,
+          "effectRange": null,
+          "directHitAdjustment": null,
+          "resilience": 3300,
+          "duration": 10
+        },
+      ]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve a expansion part {{ tag: 'GET', label: '/api/v1/parts/expansion/:id' }}
+
+<Row>
+  <Col>
+
+    Returns the expansion part with the specified ID.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/v1/parts/expansion/2">
+
+    ```bash {{ title: 'cURL' }}
+    curl -G https://me-api.njwong.workers.dev/api/v1/parts/expansion/2
+    ```
+
+    ```js {{ title: 'JavaScript (fetch)' }}
+    const response = await fetch('https://raven-api.njwong.workers.dev/api/v1/parts/expansion/2')
+    ```
+
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 2,
+      "regulationVersion": "1.01",
+      "name": "PULSE ARMOR",
+      "attackPower": null,
+      "impact": null,
+      "accumulativeImpact": null,
+      "blastRadius": null,
+      "effectRange": null,
+      "directHitAdjustment": null,
+      "resilience": 3300,
+      "duration": 10
+    },
+    ```
+
+  </Col>
+</Row>

@@ -17,6 +17,7 @@ interface NavGroup {
   links: Array<{
     title: string
     href: string
+    className?: string
   }>
 }
 
@@ -136,7 +137,7 @@ function ActivePageMarker({
   return (
     <motion.div
       layout
-      className="absolute left-2 h-6 w-px bg-emerald-500"
+      className="absolute left-2 h-6 w-px bg-rose-500"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -191,7 +192,7 @@ function NavigationGroup({
           {group.links.map((link) => (
             <motion.li key={link.href} layout="position" className="relative">
               <NavLink href={link.href} active={link.href === pathname}>
-                {link.title}
+                <span className={link.className}>{link.title}</span>
               </NavLink>
               <AnimatePresence mode="popLayout" initial={false}>
                 {link.href === pathname && sections.length > 0 && (
@@ -214,7 +215,13 @@ function NavigationGroup({
                           tag={section.tag}
                           isAnchorLink
                         >
-                          {section.title}
+                          {section.tag === 'MODEL' ? (
+                            <span className="font-mono text-xs font-bold uppercase">
+                              {section.title}
+                            </span>
+                          ) : (
+                            section.title
+                          )}
                         </NavLink>
                       </li>
                     ))}
@@ -231,36 +238,53 @@ function NavigationGroup({
 
 export const navigation: Array<NavGroup> = [
   {
-    title: 'Guides',
+    title: 'Introduction',
     links: [
-      { title: 'Introduction', href: '/' },
+      { title: 'What is Raven API?', href: '/' },
       { title: 'Quickstart', href: '/quickstart' },
-      { title: 'SDKs', href: '/sdks' },
-      { title: 'Authentication', href: '/authentication' },
-      { title: 'Pagination', href: '/pagination' },
-      { title: 'Errors', href: '/errors' },
-      { title: 'Webhooks', href: '/webhooks' },
+      { title: 'Usage', href: '/usage' },
+      { title: 'Support', href: '/support' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Guides',
     links: [
-      { title: 'Contacts', href: '/contacts' },
-      { title: 'Conversations', href: '/conversations' },
-      { title: 'Messages', href: '/messages' },
-      { title: 'Groups', href: '/groups' },
-      { title: 'Attachments', href: '/attachments' },
+      { title: 'Pagination', href: '/pagination' },
+      { title: 'Errors', href: '/errors' },
+      { title: 'Support', href: '/support' },
+      { title: 'Contributing', href: '/contributing' },
     ],
   },
+  {
+    title: 'API Reference',
+    links: [
+      { title: 'Parts', href: '/parts', className: 'font-bold' },
+      { title: 'Units', href: '/units', className: 'font-bold' },
+      { title: 'AC', href: '/ac', className: 'font-bold' },
+    ],
+  },
+  // {
+  //   title: 'API Reference',
+  //   links: [
+  //     { title: 'Head', href: '/head' },
+  //     { title: 'Core', href: '/core' },
+  //     { title: 'Arms', href: '/arms' },
+  //     { title: 'Legs', href: '/legs' },
+  //     { title: 'Booster', href: '/booster' },
+  //     { title: 'FCS', href: '/fcs' },
+  //     { title: 'Generator', href: '/generator' },
+  //   ],
+  // },
+  // {
+  //   title: 'AC Reference',
+  //   links: [{ title: 'AC Specs', href: '/ac-specs' }],
+  // },
 ]
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="/">API</TopLevelNavItem>
-        <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-        <TopLevelNavItem href="#">Support</TopLevelNavItem>
         {navigation.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}
@@ -268,11 +292,6 @@ export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
             className={groupIndex === 0 ? 'md:mt-0' : ''}
           />
         ))}
-        <li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
-          <Button href="#" variant="filled" className="w-full">
-            Sign in
-          </Button>
-        </li>
       </ul>
     </nav>
   )

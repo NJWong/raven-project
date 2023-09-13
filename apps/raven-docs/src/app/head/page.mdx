@@ -1,0 +1,62 @@
+export const metadata = {
+  title: 'Head',
+  description: 'All head parts you can use for your AC',
+}
+
+## Overview
+
+Description for head part.
+
+## Model
+
+<Properties>
+  <Property name="id" type="number">
+    Unique identifier for the part.
+  </Property>
+  <Property name="regulationVersion" type="string">
+    Regulation version that these specs are valid for.
+  </Property>
+  <Property name="name" type="string">
+    Name of the part.
+  </Property>
+  <Property name="ap" type="number">
+    Total Armor Points (AP) of the part.
+  </Property>
+  <Property name="antiKineticDefense" type="number">
+    Defense rating against kinetic damage.
+  </Property>
+  <Property name="antiEnergyDefense" type="number">
+    Defense rating against energy damage.
+  </Property>
+  <Property name="antiExplosiveDefense" type="number">
+    Defense rating against explosive/incendiary damage.
+  </Property>
+  <Property name="attitudeStability" type="number">
+    Description
+  </Property>
+  <Property name="systemRecovery" type="number">
+    Description
+  </Property>
+  <Property name="scanDistance" type="number">
+    Description
+  </Property>
+  <Property name="scanEffectDuration" type="number">
+    Description
+  </Property>
+  <Property name="weight" type="number">
+    Total weight of the part.
+  </Property>
+  <Property name="enLoad" type="number">
+    Total energy load of the part.
+  </Property>
+</Properties>
+
+---
+
+## Get all head parts {{ tag: 'GET', label: '/api/v1/parts/head' }}
+
+Description for endpoint.
+
+## Get a specific head part {{ tag: 'GET', label: '/api/v1/parts/head/:id' }}
+
+Description for endpoint.
