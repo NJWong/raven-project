@@ -25,7 +25,7 @@ function transformHeader (header: string) {
 async function seedHead(db: LibSQLDatabase) {
   console.log('Seeding head table...')
 
-  fs.readFile('data/head.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/head.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -61,7 +61,7 @@ async function seedHead(db: LibSQLDatabase) {
 async function seedCore(db: LibSQLDatabase) {
   console.log('Seeding core table...')
 
-  fs.readFile('data/core.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/core.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -97,7 +97,7 @@ async function seedCore(db: LibSQLDatabase) {
 async function seedArms(db: LibSQLDatabase) {
   console.log('Seeding arms table...')
 
-  fs.readFile('data/arms.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/arms.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -133,7 +133,7 @@ async function seedArms(db: LibSQLDatabase) {
 async function seedLegs(db: LibSQLDatabase) {
   console.log('Seeding legs table...')
 
-  fs.readFile('data/legs.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/legs.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -169,7 +169,7 @@ async function seedLegs(db: LibSQLDatabase) {
 async function seedBooster(db: LibSQLDatabase) {
   console.log('Seeding booster table...')
 
-  fs.readFile('data/booster.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/booster.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -205,7 +205,7 @@ async function seedBooster(db: LibSQLDatabase) {
 async function seedFcs(db: LibSQLDatabase) {
   console.log('Seeding fcs table...')
 
-  fs.readFile('data/fcs.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/fcs.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -241,7 +241,7 @@ async function seedFcs(db: LibSQLDatabase) {
 async function seedGenerator(db: LibSQLDatabase) {
   console.log('Seeding generator table...')
 
-  fs.readFile('data/generator.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/generator.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -277,7 +277,7 @@ async function seedGenerator(db: LibSQLDatabase) {
 async function seedAcSpecs(db: LibSQLDatabase) {
   console.log('Seeding ac_specs table...')
 
-  fs.readFile('data/ac_specs.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/ac/specs.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
@@ -307,7 +307,7 @@ async function seedAcSpecs(db: LibSQLDatabase) {
 async function seedPartsSpecs(db: LibSQLDatabase) {
   console.log('Seeding parts_specs table...')
 
-  fs.readFile('data/parts_specs.csv', 'utf-8', async (err, data) => {
+  fs.readFile('data/parts/specs.csv', 'utf-8', async (err, data) => {
     if (err) {
       console.error(err)
     } else {
