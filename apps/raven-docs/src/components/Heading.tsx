@@ -27,6 +27,10 @@ function Eyebrow({ tag, label }: { tag?: string; label?: string }) {
     return null
   }
 
+  if (tag == 'MODEL') {
+    return null
+  }
+
   return (
     <div className="flex items-center gap-x-3">
       {tag && <Tag>{tag}</Tag>}

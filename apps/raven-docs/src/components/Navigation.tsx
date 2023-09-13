@@ -71,7 +71,7 @@ function NavLink({
       )}
     >
       <span className="truncate">{children}</span>
-      {tag && (
+      {tag && tag !== 'MODEL' && (
         <Tag variant="small" color="zinc">
           {tag}
         </Tag>
