@@ -259,26 +259,9 @@ export const navigation: Array<NavGroup> = [
     title: 'API Reference',
     links: [
       { title: 'Parts', href: '/parts', className: 'font-bold' },
-      { title: 'Units', href: '/units', className: 'font-bold' },
       { title: 'AC', href: '/ac', className: 'font-bold' },
     ],
   },
-  // {
-  //   title: 'API Reference',
-  //   links: [
-  //     { title: 'Head', href: '/head' },
-  //     { title: 'Core', href: '/core' },
-  //     { title: 'Arms', href: '/arms' },
-  //     { title: 'Legs', href: '/legs' },
-  //     { title: 'Booster', href: '/booster' },
-  //     { title: 'FCS', href: '/fcs' },
-  //     { title: 'Generator', href: '/generator' },
-  //   ],
-  // },
-  // {
-  //   title: 'AC Reference',
-  //   links: [{ title: 'AC Specs', href: '/ac-specs' }],
-  // },
 ]
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {

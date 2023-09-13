@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent, MouseEvent } from 'react'
 import { Heading } from '@/components/Heading'
 import { CodeGroup } from '@/components/Code'
 import { apiPathV1 } from '../consts/paths'
@@ -14,20 +14,20 @@ export function TryItOut() {
     sendRequest(`${apiPathV1}/${requestInput}`)
   }, [])
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     sendRequest(`${apiPathV1}/${requestInput}`)
   }
 
-  async function handleClick(example) {
+  async function handleClick(example: string) {
     // Set the input field to the selected example
     setRequestInput(example)
 
     sendRequest(`${apiPathV1}/${example}`)
   }
 
-  async function sendRequest(path) {
+  async function sendRequest(path: string) {
     const res = await fetch(path)
 
     const data = await res.json()
