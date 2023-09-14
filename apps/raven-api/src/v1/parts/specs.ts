@@ -9,10 +9,14 @@ const router = Router({ base: '/api/v1/parts/specs' })
 router.get('/', async (request: Request, env: Env) => {
   const url = new URL(request.url)
   const params = new URLSearchParams(url.search)
-  const name = params.get('name')
+
+  // Pagination
   const limit = parseInt(params.get('limit') ?? '20') ?? 20
   const cappedLimit = Math.min(limit, 60)
   const offset = parseInt(params.get('offset') ?? '0') ?? 0
+
+  // Name - exact match
+  const name = params.get('name')
 
 	const client = createClient({
 		url: env.DATABASE_URL,

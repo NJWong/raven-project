@@ -3,15 +3,22 @@ import { createClient } from '@libsql/client/web'
 import { drizzle } from 'drizzle-orm/libsql'
 import { sql, eq } from "drizzle-orm"
 import { legs } from '../../../drizzle/schema'
+import { CURRENT_VERSION, REGULATION_VERSIONS } from '../consts/regulationVersion'
 
 const router = Router({ base: '/api/v1/parts/legs' })
 
 router.get('/', async (request: Request, env: Env) => {
   const url = new URL(request.url)
   const params = new URLSearchParams(url.search)
+
+  // Pagination
   const limit = parseInt(params.get('limit') ?? '20') ?? 20
   const cappedLimit = Math.min(limit, 60)
   const offset = parseInt(params.get('offset') ?? '0') ?? 0
+
+  // Regulation version
+  const regVerParam = params.get('reg_ver') ?? ''
+  const regulationVersion = REGULATION_VERSIONS.includes(regVerParam) ? regVerParam : CURRENT_VERSION
 
 	const client = createClient({
 		url: env.DATABASE_URL,
@@ -20,7 +27,7 @@ router.get('/', async (request: Request, env: Env) => {
 
   const db = drizzle(client)
 
-  const result = await db.select().from(legs).orderBy(legs.id).limit(cappedLimit).offset(offset)
+  const result = await db.select().from(legs).where(eq(legs.regulationVersion, regulationVersion)).orderBy(legs.id).limit(cappedLimit).offset(offset)
   const countResult = await db.select({ count: sql<number>`count(*)` }).from(legs)
 
   const response = {
@@ -28,6 +35,7 @@ router.get('/', async (request: Request, env: Env) => {
       limit: cappedLimit,
       offset,
       total: countResult[0].count,
+      regulationVersion,
     },
     data: result
   }
