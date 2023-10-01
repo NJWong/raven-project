@@ -10,11 +10,20 @@
     "\n================== raven-api ==================": "",
     "api:dev": "pnpm --filter raven-api api:dev",
     "api:deploy": "pnpm --filter raven-api api:deploy",
+    "api:test": "pnpm --filter raven-api api:test",
     "\n================== raven-docs ==================": "",
     "docs:dev": "pnpm --filter raven-docs docs:dev",
     "docs:build": "pnpm --filter raven-docs docs:build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/supertest": "^2.0.12",
+    "drizzle-zod": "^0.5.1",
+    "raven-api": "workspace:^",
+    "supertest": "^6.3.3",
+    "vitest": "^0.34.4",
+    "zod": "^3.22.2"
+  }
 }

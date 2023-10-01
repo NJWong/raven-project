@@ -5,6 +5,7 @@
 	"scripts": {
 		"api:dev": "wrangler dev",
 		"api:deploy": "wrangler deploy",
+    "api:test": "vitest",
     "schema:pull": "drizzle-kit introspect:sqlite"
 	},
 	"dependencies": {

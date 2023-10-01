@@ -16,6 +16,26 @@ router.get('/', async (request: Request, env: Env) => {
   const cappedLimit = Math.min(limit, 60)
   const offset = parseInt(params.get('offset') ?? '0') ?? 0
 
+  if (isNaN(limit)) {
+    return new Response(JSON.stringify({ error: 'Invalid limit' }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+  }
+
+  if (isNaN(offset)) {
+    return new Response(JSON.stringify({ error: 'Invalid offset' }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+  }
+
   // Regulation version
   const regVerParam = params.get('reg_ver') ?? ''
   const regulationVersion = REGULATION_VERSIONS.includes(regVerParam) ? regVerParam : CURRENT_VERSION
@@ -28,7 +48,7 @@ router.get('/', async (request: Request, env: Env) => {
   const db = drizzle(client)
 
   const result = await db.select().from(arms).where(eq(arms.regulationVersion, regulationVersion)).orderBy(arms.id).limit(cappedLimit).offset(offset)
-  const countResult = await db.select({ count: sql<number>`count(*)` }).from(arms)
+  const countResult = await db.select({ count: sql<number>`count(*)` }).from(arms).where(eq(arms.regulationVersion, regulationVersion))
 
   const response = {
     meta: {
